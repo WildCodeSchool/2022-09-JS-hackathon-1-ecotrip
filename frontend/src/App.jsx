@@ -2,11 +2,14 @@ import { useEffect, useState } from "react";
 import { Link, Route, Routes } from "react-router-dom";
 import "./App.css";
 import HomePage from "./components/HomePage";
+import ResultPage from "./components/ResultPage";
 import logo from "./assets/logo.png";
+import distance from "./utils";
 
 function App() {
   const [startingPoint, setStartingPoint] = useState("");
   const [destination, setDestination] = useState("");
+  const [distanceInKm, setDistanceInKm] = useState();
 
   const urlDepart = `https://api.opentripmap.com/0.1/en/places/geoname?apikey=${
     import.meta.env.VITE_API_KEY
@@ -55,9 +58,10 @@ function App() {
   };
 
   useEffect(() => {
-    fetchDepart();
-    fetchArrivee();
-  }, [startingPoint, destination]);
+    if (filterNameArrivee && filterNameDepart) {
+      setDistanceInKm(distance(filterNameArrivee, filterNameDepart));
+    }
+  }, [filterNameDepart, filterNameArrivee]);
 
   return (
     <div className="App">

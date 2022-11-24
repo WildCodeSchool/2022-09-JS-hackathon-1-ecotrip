@@ -8,7 +8,7 @@ function HomePage({
   setStartingPoint,
   destination,
   setDestination,
-  distance,
+  handleClick,
 }) {
   return (
     <main className="h-screen w-screen bg-blue-300 flex flex-col items-center justify-evenly">
@@ -33,7 +33,7 @@ function HomePage({
       <Link
         to="/about"
         className="bg-sky-500 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded my-10"
-        onClick={() => distance()}
+        onClick={() => handleClick()}
       >
         Be Eco-Friendly
       </Link>
@@ -47,7 +47,7 @@ HomePage.propTypes = {
   setStartingPoint: PropTypes.func.isRequired,
   destination: PropTypes.string.isRequired,
   setDestination: PropTypes.func.isRequired,
-  distance: PropTypes.func.isRequired,
+  handleClick: PropTypes.func.isRequired,
 };
 
 export default HomePage;
