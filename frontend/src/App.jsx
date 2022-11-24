@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
+import { Link, Route, Routes } from "react-router-dom";
 import "./App.css";
 import HomePage from "./components/HomePage";
 import logo from "./assets/logo.png";
 
 function App() {
-  const [page, setPage] = useState("home");
   const [startingPoint, setStartingPoint] = useState("");
   const [destination, setDestination] = useState("");
 
@@ -50,7 +50,7 @@ function App() {
     dist = (dist * 180) / Math.PI;
     dist = dist * 60 * 1.1515;
     dist *= 1.609344;
-    setPage("results");
+    // setPage("results"); //
     console.warn(dist);
   };
 
@@ -61,16 +61,24 @@ function App() {
 
   return (
     <div className="App">
-      {page === "home" && (
-        <HomePage
-          logo={logo}
-          startingPoint={startingPoint}
-          setStartingPoint={setStartingPoint}
-          destination={destination}
-          setDestination={setDestination}
-          distance={distance}
+      <Link to="/">home</Link>
+      <Link to="/about">about</Link>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <HomePage
+              logo={logo}
+              startingPoint={startingPoint}
+              setStartingPoint={setStartingPoint}
+              destination={destination}
+              setDestination={setDestination}
+              distance={distance}
+            />
+          }
         />
-      )}
+        <Route path="/about" element={<p>hello from /about</p>} />
+      </Routes>
     </div>
   );
 }

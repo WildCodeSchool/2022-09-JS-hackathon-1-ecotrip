@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 function HomePage({
@@ -28,13 +29,14 @@ function HomePage({
         value={destination}
         onChange={(e) => setDestination(e.target.value)}
       />
-      <button
-        type="button"
+      {/* On a peut etre cassé le distance, bisous <3 */}
+      <Link
+        to="/about"
         className="bg-sky-500 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded my-10"
         onClick={() => distance()}
       >
         Be Eco-Friendly
-      </button>
+      </Link>
     </main>
   );
 }
