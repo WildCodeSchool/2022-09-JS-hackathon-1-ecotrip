@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./App.css";
 import HomePage from "./components/HomePage";
 import logo from "./assets/logo.png";
@@ -50,14 +50,25 @@ function App() {
     dist = (dist * 180) / Math.PI;
     dist = dist * 60 * 1.1515;
     dist *= 1.609344;
-    setPage("results");
-    console.warn(dist);
+    console.warn(dist, "km");
+    const elecCar = dist * 0.1;
+    console.warn(Math.floor(elecCar), "kg CO2e pour une voiture électrique");
+    const carboncar = dist * 0.21;
+    console.warn(Math.floor(carboncar), "kg CO2e pour une voiture essence");
+    const train = dist * 0.0023;
+    console.warn(train, "kg CO2e pour un trajet en TGV");
+    const avion = dist * 0.23;
+    console.warn(avion, "kg CO2e pour un trajet en avion");
+    return dist;
   };
 
-  useEffect(() => {
-    fetchDepart();
-    fetchArrivee();
-  }, [startingPoint, destination]);
+  const handleClick = async () => {
+    await fetchDepart();
+    await fetchArrivee();
+    const distanceInKm = distance();
+    console.warn(distanceInKm, "km");
+    setPage("result");
+  };
 
   return (
     <div className="App">
@@ -69,6 +80,7 @@ function App() {
           destination={destination}
           setDestination={setDestination}
           distance={distance}
+          handleClick={handleClick}
         />
       )}
     </div>
