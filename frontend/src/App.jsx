@@ -3,7 +3,7 @@ import "./App.css";
 import HomePage from "./components/HomePage";
 import ResultPage from "./components/ResultPage";
 import logo from "./assets/logo.png";
-import distance from "./utils";
+import { distance, fetchData } from "./utils";
 
 function App() {
   const [page, setPage] = useState("home");
@@ -20,30 +20,9 @@ function App() {
   const [filterNameDepart, setFilterNameDepart] = useState([]);
   const [filterNameArrivee, setFilterNameArrivee] = useState([]);
 
-  const fetchDepart = async () => {
-    const data = await fetch(urlDepart);
-    if (data.status === 200) {
-      const coordsDepart = await data.json();
-      setFilterNameDepart(coordsDepart);
-    } else {
-      const errorBody = await data.json();
-      console.error(errorBody, "with API key");
-    }
-  };
-  const fetchArrivee = async () => {
-    const data = await fetch(urlArrivee);
-    if (data.status === 200) {
-      const coordsArrivee = await data.json();
-      setFilterNameArrivee(coordsArrivee);
-    } else {
-      const errorBody = await data.json();
-      console.error(errorBody, "with API key");
-    }
-  };
-
   const handleClick = async () => {
-    await fetchDepart();
-    await fetchArrivee();
+    await fetchData(urlDepart, setFilterNameDepart);
+    await fetchData(urlArrivee, setFilterNameArrivee);
     setPage("result");
   };
 
