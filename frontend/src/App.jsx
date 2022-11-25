@@ -4,7 +4,7 @@ import "./App.css";
 import HomePage from "./components/HomePage";
 import ResultPage from "./components/ResultPage";
 import logo from "./assets/logo.png";
-import distance from "./utils";
+import { distance, fetchData } from "./utils";
 
 function App() {
   const [startingPoint, setStartingPoint] = useState("");
